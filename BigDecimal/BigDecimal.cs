@@ -111,5 +111,20 @@ namespace BigDecimal
         {
             return left.Exponent != right.Exponent || left.Mantissa != right.Mantissa;
         }
+
+        public override string ToString()
+        {
+            string s = Mantissa.ToString();
+            if (Exponent > 0)
+            {
+                s = s.PadRight(Exponent, '0');
+            }
+            else if (Exponent < 0)
+            {
+                int decimalPos = s.Length - Exponent;
+                s = s.Insert(decimalPos, decimalPos <= 0 ? "0." + "".PadRight(-decimalPos, '0') : ".");
+            }
+            return s;
+        }
     }
 }
